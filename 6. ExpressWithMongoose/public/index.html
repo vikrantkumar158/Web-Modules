@@ -1,0 +1,53 @@
+<html>
+<body>
+<button type="button" onclick="loadDoc()">Request data</button>
+
+<p>Click the button several times to see if the time changes, or if the file is cached.</p>
+
+<p id="demo"></p>
+
+<script>
+function makeid(length) {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+    for (var i = 0; i < length; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange=function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML = this.responseText;
+    }
+  };
+  
+  // Add Product
+  
+   xhttp.open("POST", "/addProduct");
+   xhttp.setRequestHeader("Content-Type", "application/json");
+   xhttp.send(JSON.stringify({'name':makeid(9)}));
+  
+  // End add product
+
+
+  //Fetch product list
+  
+//   xhttp.open("GET", "/products");
+//   xhttp.send();
+//   
+  //End fetch product list
+
+  //Update a product
+  
+//    xhttp.open("PUT", "/updateProduct");
+//    xhttp.setRequestHeader("Content-Type", "application/json");
+//    xhttp.send(JSON.stringify({'nameNew':makeid(9) , name : 'mlbTvrndc'}));
+  //End Update product
+}
+</script>
+
+</body>
+</html>
